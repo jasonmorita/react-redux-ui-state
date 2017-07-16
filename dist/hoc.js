@@ -61,12 +61,14 @@ exports.default = function (config) {
                     var setUiState = function setUiState(state, cb) {
                         // we are using setState internally to take advantage of React
                         return _this2.setState(state, function () {
-                            _this2.props.set(state);
+                            var updatedState = _this2.props.set(state);
 
                             // optional callback to match setState API
                             if (cb) {
-                                cb();
+                                cb(updatedState.payload.state);
                             }
+
+                            return updatedState.payload.state;
                         });
                     };
 

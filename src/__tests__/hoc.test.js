@@ -23,9 +23,9 @@ describe('uiState hoc', () => {
 
     const uiStateConfig = {
         name: 'test-component',
-        state: {
+        state: () => ({
             display: false,
-        },
+        }),
     };
 
     it('should do render without exploding', () => {

@@ -16,6 +16,8 @@ React higher order component to provide UI state for components.
 
 Simple update function, same as React's `setState`.
 
+`setUiState` accepts an optional callback called with the updated state.
+
 Simple to use:
 
 ```javascript
@@ -41,7 +43,11 @@ export function someComponent ({
     uiStateName,
 }) {
     return (
-        <button onClick={() => setUiState({ someUiFlag: !someUiFlag })}>
+        <button onClick={() => setUiState({
+                    someUiFlag: !someUiFlag
+                },
+                updatedState => console.log(updatedState),
+            )}>
             Toggle flag for {uiStateName}
         </button>
     );

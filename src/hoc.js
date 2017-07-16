@@ -22,12 +22,14 @@ export default config => WrappedComponent => {
             const setUiState = (state, cb) => {
                 // we are using setState internally to take advantage of React
                 return this.setState(state, () => {
-                    this.props.set(state);
+                    const updatedState = this.props.set(state);
 
                     // optional callback to match setState API
                     if (cb) {
-                        cb();
+                        cb(updatedState.payload.state);
                     }
+
+                    return updatedState.payload.state;
                 });
             };
 
