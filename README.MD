@@ -36,7 +36,7 @@ import { uiState } from 'react-redux-ui-state';
 
 export function someComponent ({
     someUiFlag,
-    someCalculatedThing,
+    somePassedThing,
     setUiState,
     uiStateName,
 }) {
@@ -51,7 +51,7 @@ const uiStateConfig = {
     name: 'some-component',
     state: (props) => ({
         someUiFlag: false,
-        someCalculatedThing: props.x ? x : null;
+        somePassedThing: props.x ? props.x : null;
     }),
 };
 
