@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`uiStateReducer should add component intitial state 1`] = `
+Object {
+  "action-test-component_110ec58a-a0f2-4ac4-8393-c866d813b8d1": Object {
+    "val1": false,
+    "val2": true,
+  },
+}
+`;
+
+exports[`uiStateReducer should update component state 1`] = `
+Object {
+  "val1": true,
+  "val2": false,
+  "val3": "what",
+}
+`;

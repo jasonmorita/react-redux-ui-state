@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base",
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+      "indent": ["error", 4],
+      "arrow-body-style": 0,
+      "react/jsx-uses-vars": ["error"],
+      "react/react-in-jsx-scope": ["error"]
+  },
+  "env": {
+      "jest": true
+  }
+}
