@@ -42,7 +42,6 @@ exports.default = function (config) {
                 var _this = _possibleConstructorReturn(this, (uiState.__proto__ || Object.getPrototypeOf(uiState)).call(this, props));
 
                 _this.state = config.state(_this.props);
-                console.log('this.props', _this.props); // eslint-disable-line
                 return _this;
             }
 
