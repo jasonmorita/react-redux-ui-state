@@ -12,6 +12,13 @@
     },
     "author": "Jason Morita",
     "license": "MIT",
+    "keywords": [
+        "react",
+        "redux",
+        "ui",
+        "state",
+        "hoc"
+    ],
     "dependencies": {
         "immutability-helper": "^2.1.2",
         "lodash": "^4.16.6",
