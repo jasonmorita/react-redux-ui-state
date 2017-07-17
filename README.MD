@@ -14,9 +14,7 @@ React higher order component to provide UI state for components.
 - Call `setUiState` with a new state object.
 - An action gets dispatched like `UI_STATE_SET:some-component_<uuid>`
 
-Simple update function, same as React's `setState`.
-
-`setUiState` accepts an optional callback called with the updated state.
+`setUiState`: Simple update function that accepts an object that will be shallow merged with current state. Accepts an optional callback called with the state change.
 
 Simple to use:
 

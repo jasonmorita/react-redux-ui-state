@@ -65,7 +65,7 @@ exports.default = function (config) {
 
                             // optional callback to match setState API
                             if (cb) {
-                                cb(updatedState.payload.state);
+                                return cb(updatedState.payload.state);
                             }
 
                             return updatedState.payload.state;

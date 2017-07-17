@@ -26,7 +26,7 @@ export default config => WrappedComponent => {
 
                     // optional callback to match setState API
                     if (cb) {
-                        cb(updatedState.payload.state);
+                        return cb(updatedState.payload.state);
                     }
 
                     return updatedState.payload.state;
