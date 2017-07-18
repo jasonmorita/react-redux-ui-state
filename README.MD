@@ -9,10 +9,11 @@ React higher order component to provide UI state for components.
 ## How it works
 - Create a config object with an optional name property and a function (which gets passed props) which returns a state object consisting of your initial state.
 - Wrap your component in the HOC.
-- An action gets dispatched like `UI_STATE_ADD:some-component_<uuid>`
+- An action gets dispatched like `UI_STATE_ADD:some-component_<uuid>` on `componentWillMount`
 - The initial state gets added to a `uiState` slice of the store with the name/state.
 - Call `setUiState` with a new state object.
 - An action gets dispatched like `UI_STATE_SET:some-component_<uuid>`
+- Component state gets removed from store on `componentWillUnmount`
 
 `setUiState`: Simple update function that accepts an object that will be shallow merged with current state. Accepts an optional callback called with the state change.
 
