@@ -21,6 +21,15 @@ Object {
 }
 `;
 
+exports[`ui state lib utils should dispatch the delete action 1`] = `
+Object {
+  "payload": Object {
+    "name": "action-test-component_110ec58a-a0f2-4ac4-8393-c866d813b8d1",
+  },
+  "type": "UI_STATE_DELETE:action-test-component_110ec58a-a0f2-4ac4-8393-c866d813b8d1",
+}
+`;
+
 exports[`ui state lib utils should dispatch the set action 1`] = `
 Object {
   "payload": Object {
@@ -37,6 +46,7 @@ Object {
 exports[`ui state lib utils should keep consistent types 1`] = `
 Object {
   "add": "UI_STATE_ADD",
+  "delete": "UI_STATE_DELETE",
   "set": "UI_STATE_SET",
 }
 `;

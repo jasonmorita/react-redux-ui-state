@@ -6,7 +6,8 @@ Object.defineProperty(exports, "__esModule", {
 exports.types = exports.uiState = exports.uiStateReducer = undefined;
 exports.generateName = generateName;
 exports.generateType = generateType;
-exports.generateMaps = generateMaps;
+exports.dispatchToProps = dispatchToProps;
+exports.stateToProps = stateToProps;
 
 var _v = require('uuid/v4');
 
@@ -26,6 +27,7 @@ exports.uiStateReducer = _reducer2.default;
 exports.uiState = _hoc2.default;
 var types = exports.types = {
     add: 'UI_STATE_ADD',
+    delete: 'UI_STATE_DELETE',
     set: 'UI_STATE_SET'
 };
 
@@ -40,38 +42,45 @@ function generateType(type, name) {
 }
 
 // these are set as props on the HOC
-function generateMaps(name) {
+function dispatchToProps(dispatch) {
     return {
-        dispatchToProps: function dispatchToProps(dispatch) {
-            return {
-                add: function add() {
-                    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        add: function add() {
+            var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var name = arguments[1];
 
-                    return dispatch({
-                        type: generateType(types.add, name),
-                        payload: {
-                            name: name,
-                            state: state
-                        }
-                    });
-                },
-                set: function set() {
-                    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-                    return dispatch({
-                        type: generateType(types.set, name),
-                        payload: {
-                            name: name,
-                            state: state
-                        }
-                    });
+            return dispatch({
+                type: generateType(types.add, name),
+                payload: {
+                    name: name,
+                    state: state
                 }
-            };
+            });
         },
-        stateToProps: function stateToProps(state) {
-            return {
-                state: state.uiState
-            };
+        delete: function _delete(name) {
+            return dispatch({
+                type: generateType(types.delete, name),
+                payload: {
+                    name: name
+                }
+            });
+        },
+        set: function set() {
+            var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var name = arguments[1];
+
+            return dispatch({
+                type: generateType(types.set, name),
+                payload: {
+                    name: name,
+                    state: state
+                }
+            });
         }
+    };
+}
+
+function stateToProps(state) {
+    return {
+        state: state.uiState
     };
 }

@@ -5,6 +5,7 @@ export uiState from './hoc';
 
 export const types = {
     add: 'UI_STATE_ADD',
+    delete: 'UI_STATE_DELETE',
     set: 'UI_STATE_SET',
 };
 
@@ -17,34 +18,39 @@ export function generateType(type, name) {
 }
 
 // these are set as props on the HOC
-export function generateMaps(name) {
+export function dispatchToProps(dispatch) {
     return {
-        dispatchToProps(dispatch) {
-            return {
-                add(state = {}) {
-                    return dispatch({
-                        type: generateType(types.add, name),
-                        payload: {
-                            name,
-                            state,
-                        },
-                    });
+        add(state = {}, name) {
+            return dispatch({
+                type: generateType(types.add, name),
+                payload: {
+                    name,
+                    state,
                 },
-                set(state = {}) {
-                    return dispatch({
-                        type: generateType(types.set, name),
-                        payload: {
-                            name,
-                            state,
-                        },
-                    });
+            });
+        },
+        delete(name) {
+            return dispatch({
+                type: generateType(types.delete, name),
+                payload: {
+                    name,
                 },
-            };
+            });
         },
-        stateToProps(state) {
-            return {
-                state: state.uiState,
-            };
+        set(state = {}, name) {
+            return dispatch({
+                type: generateType(types.set, name),
+                payload: {
+                    name,
+                    state,
+                },
+            });
         },
+    };
+}
+
+export function stateToProps(state) {
+    return {
+        state: state.uiState,
     };
 }

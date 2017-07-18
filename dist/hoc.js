@@ -30,9 +30,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 exports.default = function (config) {
     return function (WrappedComponent) {
-        var uiStateName = (0, _.generateName)(config.name);
-        var maps = (0, _.generateMaps)(uiStateName);
-
         var uiState = function (_Component) {
             _inherits(uiState, _Component);
 
@@ -41,17 +38,20 @@ exports.default = function (config) {
 
                 var _this = _possibleConstructorReturn(this, (uiState.__proto__ || Object.getPrototypeOf(uiState)).call(this, props));
 
+                _this.uiStateName = (0, _.generateName)(config.name);
                 _this.state = config.state(_this.props);
                 return _this;
             }
 
-            // this is essentially a "run-once"
-
-
             _createClass(uiState, [{
                 key: 'componentWillMount',
                 value: function componentWillMount() {
-                    this.props.add(this.state);
+                    this.props.add(this.state, this.uiStateName);
+                }
+            }, {
+                key: 'componentWillUnmount',
+                value: function componentWillUnmount() {
+                    this.props.delete(this.uiStateName);
                 }
             }, {
                 key: 'render',
@@ -61,7 +61,7 @@ exports.default = function (config) {
                     var setUiState = function setUiState(state, cb) {
                         // we are using setState internally to take advantage of React
                         return _this2.setState(state, function () {
-                            var updatedState = _this2.props.set(state);
+                            var updatedState = _this2.props.set(state, _this2.uiStateName);
 
                             // optional callback to match setState API
                             if (cb) {
@@ -76,7 +76,7 @@ exports.default = function (config) {
                     var uiStateProps = {
                         setUiState: setUiState,
                         setUIState: setUiState, // avoid case-sensitive typos
-                        uiStateName: uiStateName // the generated name for this component's state slice
+                        uiStateName: this.uiStateName // name of component's state slice
                     };
 
                     // wrapped component with its props, the state from HOC and uiStateProps
@@ -89,10 +89,11 @@ exports.default = function (config) {
 
         uiState.propTypes = {
             add: _propTypes2.default.func.isRequired,
+            delete: _propTypes2.default.func.isRequired,
             set: _propTypes2.default.func.isRequired
         };
 
         // the HOC itself is wrapped in connect
-        return (0, _reactRedux.connect)(maps.stateToProps, maps.dispatchToProps)(uiState);
+        return (0, _reactRedux.connect)(_.stateToProps, _.dispatchToProps)(uiState);
     };
 };

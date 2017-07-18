@@ -32,6 +32,13 @@ function reducer() {
         return _extends({}, state, _defineProperty({}, action.payload.name, action.payload.state));
     }
 
+    // delete state
+    if (action.type === (0, _.generateType)(_.types.delete, (0, _get2.default)(action, 'payload.name'))) {
+        var tempState = _extends({}, state);
+        delete tempState[action.payload.name];
+        return tempState;
+    }
+
     // shallow merge for state updates
     if (action.type === (0, _.generateType)(_.types.set, (0, _get2.default)(action, 'payload.name'))) {
         return (0, _immutabilityHelper2.default)(state,

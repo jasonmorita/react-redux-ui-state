@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { generateMaps, generateName } from './';
+import { dispatchToProps, generateName, stateToProps } from './';
 
 export default config => WrappedComponent => {
-    const uiStateName = generateName(config.name);
-    const maps = generateMaps(uiStateName);
-
     class uiState extends Component {
         constructor(props) {
             super(props);
+            this.uiStateName = generateName(config.name);
             this.state = config.state(this.props);
         }
 
-        // this is essentially a "run-once"
         componentWillMount() {
-            this.props.add(this.state);
+            this.props.add(this.state, this.uiStateName);
+        }
+
+        componentWillUnmount() {
+            this.props.delete(this.uiStateName);
         }
 
         render() {
             const setUiState = (state, cb) => {
                 // we are using setState internally to take advantage of React
                 return this.setState(state, () => {
-                    const updatedState = this.props.set(state);
+                    const updatedState = this.props.set(state, this.uiStateName);
 
                     // optional callback to match setState API
                     if (cb) {
@@ -37,7 +38,7 @@ export default config => WrappedComponent => {
             const uiStateProps = {
                 setUiState,
                 setUIState: setUiState, // avoid case-sensitive typos
-                uiStateName, // the generated name for this component's state slice
+                uiStateName: this.uiStateName, // name of component's state slice
             };
 
             // wrapped component with its props, the state from HOC and uiStateProps
@@ -47,9 +48,10 @@ export default config => WrappedComponent => {
 
     uiState.propTypes = {
         add: PropTypes.func.isRequired,
+        delete: PropTypes.func.isRequired,
         set: PropTypes.func.isRequired,
     };
 
     // the HOC itself is wrapped in connect
-    return connect(maps.stateToProps, maps.dispatchToProps)(uiState);
+    return connect(stateToProps, dispatchToProps)(uiState);
 };

@@ -9,6 +9,13 @@ export default function reducer(state = {}, action) {
         return { ...state, [action.payload.name]: action.payload.state };
     }
 
+    // delete state
+    if (action.type === generateType(types.delete, get(action, 'payload.name'))) {
+        const tempState = { ...state };
+        delete tempState[action.payload.name];
+        return tempState;
+    }
+
     // shallow merge for state updates
     if (action.type === generateType(types.set, get(action, 'payload.name'))) {
         return update(
