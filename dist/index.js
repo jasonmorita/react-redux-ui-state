@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.types = exports.uiState = exports.uiStateReducer = undefined;
 exports.generateName = generateName;
 exports.generateType = generateType;
+exports.generateSetUiState = generateSetUiState;
 exports.dispatchToProps = dispatchToProps;
 exports.stateToProps = stateToProps;
 
@@ -39,6 +40,19 @@ function generateName() {
 
 function generateType(type, name) {
     return type + ':' + name;
+}
+
+function generateSetUiState(set, name) {
+    return function setUiState(state, cb) {
+        var updatedState = set(state, name);
+
+        // optional callback to match setState API
+        if (cb) {
+            return cb(updatedState.payload.state);
+        }
+
+        return updatedState.payload.state;
+    };
 }
 
 // these are set as props on the HOC

@@ -17,6 +17,19 @@ export function generateType(type, name) {
     return `${type}:${name}`;
 }
 
+export function generateSetUiState(set, name) {
+    return function setUiState(state, cb) {
+        const updatedState = set(state, name);
+
+        // optional callback to match setState API
+        if (cb) {
+            return cb(updatedState.payload.state);
+        }
+
+        return updatedState.payload.state;
+    };
+}
+
 // these are set as props on the HOC
 export function dispatchToProps(dispatch) {
     return {

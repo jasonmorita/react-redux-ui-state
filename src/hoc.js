@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { dispatchToProps, generateName, stateToProps } from './';
+import { dispatchToProps, generateName, generateSetUiState, stateToProps } from './';
 
 export default config => WrappedComponent => {
     class uiState extends Component {
@@ -20,18 +20,7 @@ export default config => WrappedComponent => {
         }
 
         render() {
-            const setUiState = (state, cb) => {
-                const updatedState = this.props.set(state, this.uiStateName);
-
-                // optional callback to match setState API
-                if (cb) {
-                    return cb(updatedState.payload.state);
-                }
-
-                return updatedState.payload.state;
-            };
-
-            // these get passed to the child as props
+            const setUiState = generateSetUiState(this.props.set, this.uiStateName);
             const uiStateProps = {
                 setUiState,
                 setUIState: setUiState, // avoid case-sensitive typos

@@ -56,20 +56,7 @@ exports.default = function (config) {
             }, {
                 key: 'render',
                 value: function render() {
-                    var _this2 = this;
-
-                    var setUiState = function setUiState(state, cb) {
-                        var updatedState = _this2.props.set(state, _this2.uiStateName);
-
-                        // optional callback to match setState API
-                        if (cb) {
-                            return cb(updatedState.payload.state);
-                        }
-
-                        return updatedState.payload.state;
-                    };
-
-                    // these get passed to the child as props
+                    var setUiState = (0, _.generateSetUiState)(this.props.set, this.uiStateName);
                     var uiStateProps = {
                         setUiState: setUiState,
                         setUIState: setUiState, // avoid case-sensitive typos
