@@ -1,6 +1,6 @@
 {
     "name": "react-redux-ui-state",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "React higher order component to provide UI state for components.",
     "main": "dist/index.js",
     "repository": "https://github.com/jasonmorita/react-redux-ui-state",
