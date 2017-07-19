@@ -39,14 +39,14 @@ exports.default = function (config) {
                 var _this = _possibleConstructorReturn(this, (uiState.__proto__ || Object.getPrototypeOf(uiState)).call(this, props));
 
                 _this.uiStateName = (0, _.generateName)(config.name);
-                _this.state = config.state(_this.props);
+                _this.initState = config.state(_this.props);
                 return _this;
             }
 
             _createClass(uiState, [{
                 key: 'componentWillMount',
                 value: function componentWillMount() {
-                    this.props.add(this.state, this.uiStateName);
+                    this.props.add(this.initState, this.uiStateName);
                 }
             }, {
                 key: 'componentWillUnmount',
@@ -59,17 +59,14 @@ exports.default = function (config) {
                     var _this2 = this;
 
                     var setUiState = function setUiState(state, cb) {
-                        // we are using setState internally to take advantage of React
-                        return _this2.setState(state, function () {
-                            var updatedState = _this2.props.set(state, _this2.uiStateName);
+                        var updatedState = _this2.props.set(state, _this2.uiStateName);
 
-                            // optional callback to match setState API
-                            if (cb) {
-                                return cb(updatedState.payload.state);
-                            }
+                        // optional callback to match setState API
+                        if (cb) {
+                            return cb(updatedState.payload.state);
+                        }
 
-                            return updatedState.payload.state;
-                        });
+                        return updatedState.payload.state;
                     };
 
                     // these get passed to the child as props
@@ -80,7 +77,7 @@ exports.default = function (config) {
                     };
 
                     // wrapped component with its props, the state from HOC and uiStateProps
-                    return _react2.default.createElement(WrappedComponent, _extends({}, this.props, this.state, uiStateProps));
+                    return _react2.default.createElement(WrappedComponent, _extends({}, this.props, this.props.uiState[this.uiStateName] || this.initState, uiStateProps));
                 }
             }]);
 
@@ -90,7 +87,8 @@ exports.default = function (config) {
         uiState.propTypes = {
             add: _propTypes2.default.func.isRequired,
             delete: _propTypes2.default.func.isRequired,
-            set: _propTypes2.default.func.isRequired
+            set: _propTypes2.default.func.isRequired,
+            uiState: _propTypes2.default.object.isRequired
         };
 
         // the HOC itself is wrapped in connect

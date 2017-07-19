@@ -51,6 +51,6 @@ export function dispatchToProps(dispatch) {
 
 export function stateToProps(state) {
     return {
-        state: state.uiState,
+        uiState: state.uiState,
     };
 }

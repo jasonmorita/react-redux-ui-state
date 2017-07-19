@@ -8,11 +8,11 @@ export default config => WrappedComponent => {
         constructor(props) {
             super(props);
             this.uiStateName = generateName(config.name);
-            this.state = config.state(this.props);
+            this.initState = config.state(this.props);
         }
 
         componentWillMount() {
-            this.props.add(this.state, this.uiStateName);
+            this.props.add(this.initState, this.uiStateName);
         }
 
         componentWillUnmount() {
@@ -21,17 +21,14 @@ export default config => WrappedComponent => {
 
         render() {
             const setUiState = (state, cb) => {
-                // we are using setState internally to take advantage of React
-                return this.setState(state, () => {
-                    const updatedState = this.props.set(state, this.uiStateName);
+                const updatedState = this.props.set(state, this.uiStateName);
 
-                    // optional callback to match setState API
-                    if (cb) {
-                        return cb(updatedState.payload.state);
-                    }
+                // optional callback to match setState API
+                if (cb) {
+                    return cb(updatedState.payload.state);
+                }
 
-                    return updatedState.payload.state;
-                });
+                return updatedState.payload.state;
             };
 
             // these get passed to the child as props
@@ -42,7 +39,15 @@ export default config => WrappedComponent => {
             };
 
             // wrapped component with its props, the state from HOC and uiStateProps
-            return <WrappedComponent {...{ ...this.props, ...this.state, ...uiStateProps }} />;
+            return (
+                <WrappedComponent
+                    {...{
+                        ...this.props,
+                        ...(this.props.uiState[this.uiStateName] || this.initState),
+                        ...uiStateProps,
+                    }}
+                />
+            );
         }
     }
 
@@ -50,6 +55,7 @@ export default config => WrappedComponent => {
         add: PropTypes.func.isRequired,
         delete: PropTypes.func.isRequired,
         set: PropTypes.func.isRequired,
+        uiState: PropTypes.object.isRequired,
     };
 
     // the HOC itself is wrapped in connect
