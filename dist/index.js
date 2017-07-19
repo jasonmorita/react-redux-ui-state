@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.types = exports.uiState = exports.uiStateReducer = undefined;
 exports.generateName = generateName;
 exports.generateType = generateType;
+exports.generateResetUiState = generateResetUiState;
 exports.generateSetUiState = generateSetUiState;
 exports.dispatchToProps = dispatchToProps;
 exports.stateToProps = stateToProps;
@@ -29,6 +30,7 @@ exports.uiState = _hoc2.default;
 var types = exports.types = {
     add: 'UI_STATE_ADD',
     delete: 'UI_STATE_DELETE',
+    reset: 'UI_STATE_RESET',
     set: 'UI_STATE_SET'
 };
 
@@ -40,6 +42,19 @@ function generateName() {
 
 function generateType(type, name) {
     return type + ':' + name;
+}
+
+function generateResetUiState(reset, name, state) {
+    return function resetUiState(cb) {
+        var resetState = reset(state, name);
+
+        // optional callback
+        if (cb) {
+            return cb(resetState.payload.state);
+        }
+
+        return resetState.payload.state;
+    };
 }
 
 function generateSetUiState(set, name) {
@@ -75,6 +90,18 @@ function dispatchToProps(dispatch) {
                 type: generateType(types.delete, name),
                 payload: {
                     name: name
+                }
+            });
+        },
+        reset: function reset() {
+            var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+            var name = arguments[1];
+
+            return dispatch({
+                type: generateType(types.reset, name),
+                payload: {
+                    name: name,
+                    state: state
                 }
             });
         },

@@ -16,6 +16,11 @@ export default function reducer(state = {}, action) {
         return tempState;
     }
 
+    // reset to initial state
+    if (action.type === generateType(types.reset, get(action, 'payload.name'))) {
+        return { ...state, [action.payload.name]: action.payload.state };
+    }
+
     // shallow merge for state updates
     if (action.type === generateType(types.set, get(action, 'payload.name'))) {
         return update(

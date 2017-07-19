@@ -6,6 +6,7 @@ export uiState from './hoc';
 export const types = {
     add: 'UI_STATE_ADD',
     delete: 'UI_STATE_DELETE',
+    reset: 'UI_STATE_RESET',
     set: 'UI_STATE_SET',
 };
 
@@ -15,6 +16,19 @@ export function generateName(name = '') {
 
 export function generateType(type, name) {
     return `${type}:${name}`;
+}
+
+export function generateResetUiState(reset, name, state) {
+    return function resetUiState(cb) {
+        const resetState = reset(state, name);
+
+        // optional callback
+        if (cb) {
+            return cb(resetState.payload.state);
+        }
+
+        return resetState.payload.state;
+    };
 }
 
 export function generateSetUiState(set, name) {
@@ -47,6 +61,15 @@ export function dispatchToProps(dispatch) {
                 type: generateType(types.delete, name),
                 payload: {
                     name,
+                },
+            });
+        },
+        reset(state = {}, name) {
+            return dispatch({
+                type: generateType(types.reset, name),
+                payload: {
+                    name,
+                    state,
                 },
             });
         },

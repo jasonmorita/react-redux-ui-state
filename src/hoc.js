@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { dispatchToProps, generateName, generateSetUiState, stateToProps } from './';
+import {
+    dispatchToProps,
+    generateName,
+    generateResetUiState,
+    generateSetUiState,
+    stateToProps,
+} from './';
 
 export default config => WrappedComponent => {
     class uiState extends Component {
@@ -20,8 +26,15 @@ export default config => WrappedComponent => {
         }
 
         render() {
+            const resetUiState = generateResetUiState(
+                this.props.reset,
+                this.uiStateName,
+                this.initState,
+            );
             const setUiState = generateSetUiState(this.props.set, this.uiStateName);
             const uiStateProps = {
+                resetUiState,
+                resetUIState: resetUiState, // avoid case-sensitive typos
                 setUiState,
                 setUIState: setUiState, // avoid case-sensitive typos
                 uiStateName: this.uiStateName, // name of component's state slice
@@ -43,6 +56,7 @@ export default config => WrappedComponent => {
     uiState.propTypes = {
         add: PropTypes.func.isRequired,
         delete: PropTypes.func.isRequired,
+        reset: PropTypes.func.isRequired,
         set: PropTypes.func.isRequired,
         uiState: PropTypes.object.isRequired,
     };

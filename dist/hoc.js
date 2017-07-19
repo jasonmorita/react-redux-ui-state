@@ -56,8 +56,11 @@ exports.default = function (config) {
             }, {
                 key: 'render',
                 value: function render() {
+                    var resetUiState = (0, _.generateResetUiState)(this.props.reset, this.uiStateName, this.initState);
                     var setUiState = (0, _.generateSetUiState)(this.props.set, this.uiStateName);
                     var uiStateProps = {
+                        resetUiState: resetUiState,
+                        resetUIState: resetUiState, // avoid case-sensitive typos
                         setUiState: setUiState,
                         setUIState: setUiState, // avoid case-sensitive typos
                         uiStateName: this.uiStateName // name of component's state slice
@@ -74,6 +77,7 @@ exports.default = function (config) {
         uiState.propTypes = {
             add: _propTypes2.default.func.isRequired,
             delete: _propTypes2.default.func.isRequired,
+            reset: _propTypes2.default.func.isRequired,
             set: _propTypes2.default.func.isRequired,
             uiState: _propTypes2.default.object.isRequired
         };

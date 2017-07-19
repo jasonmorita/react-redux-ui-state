@@ -17,6 +17,8 @@ React higher order component to provide UI state for components.
 
 `setUiState`: Simple update function that accepts an object that will be shallow merged with current state. Accepts an optional callback called with the state change.
 
+`resetUiState`: Function to reset component to initial state. Accepts an optional callback called with the initial state.
+
 Simple to use:
 
 ```javascript
@@ -38,6 +40,7 @@ import { uiState } from 'react-redux-ui-state';
 export function someComponent ({
     someUiFlag,
     somePassedThing,
+    resetUiState,
     setUiState,
     uiStateName,
 }) {
@@ -48,6 +51,13 @@ export function someComponent ({
                 updatedState => console.log(updatedState),
             )}>
             Toggle flag for {uiStateName}
+        </button>
+
+        <button
+            onClick={() =>
+                resetUiState(resetState => console.log(resetState))}
+        >
+            reset state
         </button>
     );
 }

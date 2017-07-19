@@ -47,6 +47,7 @@ exports[`ui state lib utils should keep consistent types 1`] = `
 Object {
   "add": "UI_STATE_ADD",
   "delete": "UI_STATE_DELETE",
+  "reset": "UI_STATE_RESET",
   "set": "UI_STATE_SET",
 }
 `;
