@@ -15,6 +15,8 @@ React higher order component to provide UI state for components.
 - An action gets dispatched like `UI_STATE_SET:some-component_<uuid>`
 - Component state gets removed from store on `componentWillUnmount`
 
+In the event that `persist: true` is supplied to the config options, the name of the component's key within `uiState` will match the `name` param.
+
 `setUiState`: Simple update function that accepts an object that will be shallow merged with current state. Accepts an optional callback called with the state change.
 
 `resetUiState`: Function to reset component to initial state. Accepts an optional callback called with the initial state.
@@ -64,6 +66,7 @@ export function someComponent ({
 
 const uiStateConfig = {
     name: 'some-component',
+    persist: true, // optional
     state: (props) => ({
         someUiFlag: false,
         somePassedThing: props.x ? props.x : null;

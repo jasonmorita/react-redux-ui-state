@@ -13,8 +13,9 @@ export default config => WrappedComponent => {
     class uiState extends Component {
         constructor(props) {
             super(props);
-            this.uiStateName = generateName(config.name);
+            this.uiStateName = config.persist ? config.name : generateName(config.name);
             this.initState = config.state(this.props);
+            this.config = config;
         }
 
         componentWillMount() {
@@ -22,7 +23,9 @@ export default config => WrappedComponent => {
         }
 
         componentWillUnmount() {
-            this.props.delete(this.uiStateName);
+            if (!this.config.persist) {
+                this.props.delete(this.uiStateName);
+            }
         }
 
         render() {

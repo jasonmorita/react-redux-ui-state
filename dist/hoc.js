@@ -38,8 +38,9 @@ exports.default = function (config) {
 
                 var _this = _possibleConstructorReturn(this, (uiState.__proto__ || Object.getPrototypeOf(uiState)).call(this, props));
 
-                _this.uiStateName = (0, _.generateName)(config.name);
+                _this.uiStateName = config.persist ? config.name : (0, _.generateName)(config.name);
                 _this.initState = config.state(_this.props);
+                _this.config = config;
                 return _this;
             }
 
@@ -51,7 +52,9 @@ exports.default = function (config) {
             }, {
                 key: 'componentWillUnmount',
                 value: function componentWillUnmount() {
-                    this.props.delete(this.uiStateName);
+                    if (!this.config.persist) {
+                        this.props.delete(this.uiStateName);
+                    }
                 }
             }, {
                 key: 'render',
