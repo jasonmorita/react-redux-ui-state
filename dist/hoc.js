@@ -38,7 +38,7 @@ exports.default = function (config) {
 
                 var _this = _possibleConstructorReturn(this, (uiState.__proto__ || Object.getPrototypeOf(uiState)).call(this, props));
 
-                _this.uiStateName = config.persist ? config.name : (0, _.generateName)(config.name);
+                _this.uiStateName = typeof config.name === 'function' ? config.name(props) : (0, _.generateName)(config.name);
                 _this.initState = config.state(_this.props);
                 _this.config = config;
                 return _this;
