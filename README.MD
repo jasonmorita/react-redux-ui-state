@@ -1,10 +1,9 @@
-# react-redux-ui-state
-React higher order component to provide UI state for components.
+# Truly painless UI state for components.
 
-## Problems this is trying reduce
-- Reduce the need to reach for `setState` to save time for simple flags
-- Reduce reducer boilerplate for properties like UI flags
-- Reduce tediousness of instances of the same component needing the same flags
+## Goals of this library
+- Reduce the need to reach for `setState` to save time for simple flags (component state without classes)
+- Reduce Redux boilerplate for properties like UI flags
+- Reduce complexity of instances of the same component needing the same flags
 
 ## How it works
 - Create a config object with an optional name property and a function (which gets passed props) which returns a state object consisting of your initial state.
@@ -13,7 +12,7 @@ React higher order component to provide UI state for components.
 - The initial state gets added to a `uiState` slice of the store with the name/state.
 - Call `setUiState` with a new state object.
 - An action gets dispatched like `UI_STATE_SET:some-component_<uuid>`
-- Component state gets removed from store on `componentWillUnmount`
+- Component state gets removed from store on `componentWillUnmount` (optional)
 
 `setUiState`: Simple update function that accepts an object that will be shallow merged with current state. Accepts an optional callback called with the state change.
 
@@ -38,7 +37,8 @@ Extend the wrapper component's props, e.g.
 const uiStateConfig = {
     ...
     state: (props) => ({
-        myProp: 'myProp'
+        uiProp: 'uiProp',
+        uiActive: props.active,
     }),
     ...
 };
@@ -49,6 +49,7 @@ Defaults to `false`. If `true` the component's state will not be removed from th
 
 ```js
 const uiStateConfig = {
+    ...
     persist: true,
     ...
 };
@@ -57,7 +58,7 @@ const uiStateConfig = {
 
 ## Usage:
 
-```jsx
+```javascript
 // rootReducer.js
 import { combineReducers } from 'redux';
 import { uiStateReducer } from 'react-redux-ui-state';
@@ -110,4 +111,4 @@ const uiStateConfig = {
 export default uiState(uiStateConfig)(someComponent);
 ```
 
-This is a work in progress. There could well be performance issues when used "at scale". Feel free to open a PR.
+Feel free to open a PR!
