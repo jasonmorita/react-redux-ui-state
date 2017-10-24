@@ -19,9 +19,45 @@ React higher order component to provide UI state for components.
 
 `resetUiState`: Function to reset component to initial state. Accepts an optional callback called with the initial state.
 
-Simple to use:
+## uiState Options
 
-```javascript
+#### `name {String | Function}`
+If a string is provided a uuid will be suffixed in order not to overwrite the state in the store. Providing a function gives you the ability to create your own unique name, with the ability to use the component's `props`, e.g:
+
+```js
+const uiStateConfig = {
+    ...
+    name: props => `MyComponent__${props.className}`,
+    ...
+};
+```
+
+#### `state {Function}`
+Extend the wrapper component's props, e.g.
+```js
+const uiStateConfig = {
+    ...
+    state: (props) => ({
+        myProp: 'myProp'
+    }),
+    ...
+};
+```
+
+#### `persist {Boolean}`
+Defaults to `false`. If `true` the component's state will not be removed from the `uiState` domain.
+
+```js
+const uiStateConfig = {
+    persist: true,
+    ...
+};
+```
+
+
+## Usage:
+
+```jsx
 // rootReducer.js
 import { combineReducers } from 'redux';
 import { uiStateReducer } from 'react-redux-ui-state';
@@ -64,6 +100,7 @@ export function someComponent ({
 
 const uiStateConfig = {
     name: 'some-component',
+    persist: true, // optional
     state: (props) => ({
         someUiFlag: false,
         somePassedThing: props.x ? props.x : null;
