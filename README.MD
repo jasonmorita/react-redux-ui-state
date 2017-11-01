@@ -1,9 +1,10 @@
 # Truly painless UI state for components.
 
 ## Goals of this library
-- Reduce the need to reach for `setState` to save time for simple flags (component state without classes)
+- Make it easy to have component state in Redux
+- Make it possible to have "internal" state with or without using classes
 - Reduce Redux boilerplate for properties like UI flags
-- Reduce complexity of instances of the same component needing the same flags
+- Easily allow multiple instances of the same component to get their own state
 
 ## How it works
 - Create a config object with an optional name property and a function (which gets passed props) which returns a state object consisting of your initial state.
