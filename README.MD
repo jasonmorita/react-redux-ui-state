@@ -4,7 +4,8 @@
 - Make it easy to have component state in Redux
 - Make it possible to have "internal" state with or without using classes
 - Reduce Redux boilerplate for properties like UI flags
-- Easily allow multiple instances of the same component to get their own state
+- Easily allow multiple instances of the same component to get their own
+- Get the benefits of Redux without most of the work for UI state
 
 ## How it works
 - Create a config object with an optional name property and a function (which gets passed props) which returns a state object consisting of your initial state.
