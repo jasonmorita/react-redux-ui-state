@@ -1,5 +1,13 @@
 # Truly painless UI state for components.
 
+### Install
+```
+npm i react-redux-ui-state -S
+```
+```
+yarn add react-redux-ui-state
+```
+
 ## Goals of this library
 - Make it easy to have component state in Redux
 - Make it possible to have "internal" state with or without using classes
