@@ -1,4 +1,4 @@
-import get from 'lodash/get';
+import { get } from 'lodash';
 import update from 'immutability-helper';
 import { types, generateType } from './';
 

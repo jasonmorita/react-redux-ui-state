@@ -3,9 +3,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { mount } from 'enzyme';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
 import { uiState } from '../';
+
+configure({ adapter: new Adapter() });
 
 describe('uiState hoc', () => {
     function testComponent({ display }) {
@@ -31,7 +34,7 @@ describe('uiState hoc', () => {
     it('should do render without exploding', () => {
         const component = (
             <Provider store={createStore(uiState)}>
-                <wrappedTestComponent />
+                <wrapped-test-component />
             </Provider>
         );
 

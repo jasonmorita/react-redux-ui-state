@@ -12,7 +12,7 @@ exports[`uiState hoc should do render without exploding 1`] = `
     }
   }
 >
-  <wrappedTestComponent />
+  <wrapped-test-component />
 </Provider>
 `;
 

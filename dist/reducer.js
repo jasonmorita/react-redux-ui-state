@@ -8,9 +8,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 exports.default = reducer;
 
-var _get = require('lodash/get');
-
-var _get2 = _interopRequireDefault(_get);
+var _lodash = require('lodash');
 
 var _immutabilityHelper = require('immutability-helper');
 
@@ -28,24 +26,24 @@ function reducer() {
     var action = arguments[1];
 
     // add initial state
-    if (action.type === (0, _.generateType)(_.types.add, (0, _get2.default)(action, 'payload.name'))) {
+    if (action.type === (0, _.generateType)(_.types.add, (0, _lodash.get)(action, 'payload.name'))) {
         return _extends({}, state, _defineProperty({}, action.payload.name, action.payload.state));
     }
 
     // delete state
-    if (action.type === (0, _.generateType)(_.types.delete, (0, _get2.default)(action, 'payload.name'))) {
+    if (action.type === (0, _.generateType)(_.types.delete, (0, _lodash.get)(action, 'payload.name'))) {
         var tempState = _extends({}, state);
         delete tempState[action.payload.name];
         return tempState;
     }
 
     // reset to initial state
-    if (action.type === (0, _.generateType)(_.types.reset, (0, _get2.default)(action, 'payload.name'))) {
+    if (action.type === (0, _.generateType)(_.types.reset, (0, _lodash.get)(action, 'payload.name'))) {
         return _extends({}, state, _defineProperty({}, action.payload.name, action.payload.state));
     }
 
     // shallow merge for state updates
-    if (action.type === (0, _.generateType)(_.types.set, (0, _get2.default)(action, 'payload.name'))) {
+    if (action.type === (0, _.generateType)(_.types.set, (0, _lodash.get)(action, 'payload.name'))) {
         return (0, _immutabilityHelper2.default)(state,
         // if store not created with combinedReducers, assume state is top-level
         state[action.payload.name] ? _defineProperty({}, action.payload.name, { $merge: action.payload.state }) : { $merge: action.payload.state });
