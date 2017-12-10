@@ -1,9 +1,9 @@
-import React from "react";
-import { uiState } from "react-redux-ui-state";
-import logo from "./logo.svg";
-import "./App.css";
-import Button from "./Button";
-import Text from "./Text";
+import React from 'react';
+import { uiState } from 'react-redux-ui-state';
+import logo from './logo.svg';
+import './App.css';
+import Button from './Button';
+import Text from './Text';
 
 function App({ setUiState, uiAppFlag }) {
     return (
@@ -18,13 +18,15 @@ function App({ setUiState, uiAppFlag }) {
                 </button>
             </p>
             <Button />
+            <Button />
+            <Text />
             <Text />
         </div>
     );
 }
 
 const uiStateConfig = {
-    name: "AppMain",
+    name: 'AppMain',
     state: () => ({
         uiAppFlag: true,
     }),

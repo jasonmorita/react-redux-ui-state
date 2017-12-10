@@ -1,5 +1,5 @@
-import React from "react";
-import { uiState } from "react-redux-ui-state";
+import React from 'react';
+import { uiState } from 'react-redux-ui-state';
 
 function Button({ setUiState, uiButtonFlag }) {
     return (
@@ -12,7 +12,7 @@ function Button({ setUiState, uiButtonFlag }) {
 }
 
 const uiStateConfig = {
-    name: "Button",
+    name: 'Button',
     state: () => ({
         uiButtonFlag: true,
     }),
