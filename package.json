@@ -1,24 +1,20 @@
 {
     "name": "react-redux-ui-state",
-    "version": "0.1.4",
-    "description": "React higher order component to provide UI state for components.",
+    "version": "0.2.0",
+    "description":
+        "React higher order component to provide UI state for components.",
     "main": "dist/index.js",
     "repository": "https://github.com/jasonmorita/react-redux-ui-state",
     "scripts": {
-        "build": "babel src --out-dir dist --ignore '**/*.test.js','**/__mocks__/*'",
+        "build":
+            "babel src --out-dir dist --ignore '**/*.test.js','**/__mocks__/*'",
         "lint": "eslint .",
         "test": "jest src",
         "prepublish": "npm run build"
     },
     "author": "Jason Morita",
     "license": "MIT",
-    "keywords": [
-        "react",
-        "redux",
-        "ui",
-        "state",
-        "hoc"
-    ],
+    "keywords": ["react", "redux", "ui", "state", "hoc"],
     "dependencies": {
         "immutability-helper": "^2.1.2",
         "lodash": "^4.16.6",
@@ -59,13 +55,8 @@
     },
     "jest": {
         "testEnvironment": "node",
-        "testPathIgnorePatterns": [
-            "/node_modules/",
-            "./dist"
-        ],
-        "collectCoverageFrom": [
-            "src/*.js"
-        ],
+        "testPathIgnorePatterns": ["/node_modules/", "./dist"],
+        "collectCoverageFrom": ["src/*.js"],
         "coverageThreshold": {
             "global": {
                 "statements": 100,
