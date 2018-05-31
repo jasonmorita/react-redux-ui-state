@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash/isEqual';
 import { connect } from 'react-redux';
 import {
     dispatchToProps,
@@ -23,12 +22,6 @@ export default config => WrappedComponent => {
 
         componentWillMount() {
             this.props.add(this.initState, this.uiStateName);
-        }
-
-        shouldComponentUpdate(nextProps) {
-            const currentState = this.props.uiState[this.uiStateName];
-            const nextState = nextProps.uiState[this.uiStateName];
-            return !isEqual(currentState, nextState);
         }
 
         componentWillUnmount() {
