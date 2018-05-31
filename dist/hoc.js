@@ -16,6 +16,10 @@ var _propTypes = require('prop-types');
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
 var _reactRedux = require('react-redux');
 
 var _ = require('./');
@@ -48,6 +52,13 @@ exports.default = function (config) {
                 key: 'componentWillMount',
                 value: function componentWillMount() {
                     this.props.add(this.initState, this.uiStateName);
+                }
+            }, {
+                key: 'shouldComponentUpdate',
+                value: function shouldComponentUpdate(nextProps) {
+                    var currentState = this.props.uiState[this.uiStateName];
+                    var nextState = nextProps.uiState[this.uiStateName];
+                    return !(0, _isEqual2.default)(currentState, nextState);
                 }
             }, {
                 key: 'componentWillUnmount',
