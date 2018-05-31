@@ -1,6 +1,6 @@
 {
     "name": "react-redux-ui-state",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "description":
         "React higher order component to provide UI state for components.",
     "main": "dist/index.js",
