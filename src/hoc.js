@@ -21,7 +21,9 @@ export default config => WrappedComponent => {
         }
 
         componentWillMount() {
-            this.props.add(this.initState, this.uiStateName);
+            if (!this.config.persist || !this.props.uiState[this.uiStateName]) {
+                this.props.add(this.initState, this.uiStateName);
+            }
         }
 
         componentWillUnmount() {
