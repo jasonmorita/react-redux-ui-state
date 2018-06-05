@@ -69,6 +69,7 @@ exports.default = function (config) {
             }, {
                 key: 'shouldComponentUpdate',
                 value: function shouldComponentUpdate(nextProps) {
+                    // First be sure that the uiState slice is not equal
                     var currentState = this.props.uiState[this.uiStateName];
                     var nextState = nextProps.uiState[this.uiStateName];
 
@@ -76,6 +77,7 @@ exports.default = function (config) {
                         return true;
                     }
 
+                    // If uiState slice is equal, check the rest of the props
                     currentState = (0, _omit2.default)(this.props, ['uiState']);
                     nextState = (0, _omit2.default)(nextProps, ['uiState']);
 
@@ -84,7 +86,6 @@ exports.default = function (config) {
             }, {
                 key: 'render',
                 value: function render() {
-                    console.log('rerender::::', this.uiStateName);
                     var resetUiState = (0, _.generateResetUiState)(this.props.reset, this.uiStateName, this.initState);
                     var setUiState = (0, _.generateSetUiState)(this.props.set, this.uiStateName);
                     var uiStateProps = {
