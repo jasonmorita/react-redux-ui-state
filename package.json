@@ -17,7 +17,11 @@
         "redux",
         "ui",
         "state",
-        "hoc"
+        "hoc",
+        "setState",
+        "uistate",
+        "management",
+        "internal"
     ],
     "dependencies": {
         "immutability-helper": "^2.1.2",
