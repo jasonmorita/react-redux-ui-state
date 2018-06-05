@@ -6,7 +6,7 @@
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-redux": "^5.0.6",
-    "react-redux-ui-state": "^0.1.4",
+    "react-redux-ui-state": "^0.5.0",
     "react-scripts": "1.0.17",
     "redux": "^3.7.2"
   },

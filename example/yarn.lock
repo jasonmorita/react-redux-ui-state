@@ -5156,9 +5156,9 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
-react-redux-ui-state@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-redux-ui-state/-/react-redux-ui-state-0.1.4.tgz#1a64e104ee5a035e5a7aa36b7b51f8f7f8636539"
+react-redux-ui-state@^0.5.0:
+  version "0.5.0"
+  resolved "https://npm.paypal.com/repository/npm-all/react-redux-ui-state/-/react-redux-ui-state-0.5.0.tgz#eb1d209e44ce8315ed76f51847adc6d5c380fcf3"
   dependencies:
     immutability-helper "^2.1.2"
     lodash "^4.16.6"
