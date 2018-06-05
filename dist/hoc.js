@@ -18,6 +18,14 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 
 var _reactRedux = require('react-redux');
 
+var _isEqual = require('lodash/isEqual');
+
+var _isEqual2 = _interopRequireDefault(_isEqual);
+
+var _omit = require('lodash/omit');
+
+var _omit2 = _interopRequireDefault(_omit);
+
 var _ = require('./');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -59,8 +67,24 @@ exports.default = function (config) {
                     }
                 }
             }, {
+                key: 'shouldComponentUpdate',
+                value: function shouldComponentUpdate(nextProps) {
+                    var currentState = this.props.uiState[this.uiStateName];
+                    var nextState = nextProps.uiState[this.uiStateName];
+
+                    if (!(0, _isEqual2.default)(currentState, nextState)) {
+                        return true;
+                    }
+
+                    currentState = (0, _omit2.default)(this.props, ['uiState']);
+                    nextState = (0, _omit2.default)(nextProps, ['uiState']);
+
+                    return !(0, _isEqual2.default)(currentState, nextState);
+                }
+            }, {
                 key: 'render',
                 value: function render() {
+                    console.log('rerender::::', this.uiStateName);
                     var resetUiState = (0, _.generateResetUiState)(this.props.reset, this.uiStateName, this.initState);
                     var setUiState = (0, _.generateSetUiState)(this.props.set, this.uiStateName);
                     var uiStateProps = {
