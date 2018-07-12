@@ -1,6 +1,6 @@
 {
     "name": "react-redux-ui-state",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "description": "React higher order component to provide UI state for components.",
     "main": "dist/index.js",
     "repository": "https://github.com/jasonmorita/react-redux-ui-state",
@@ -26,7 +26,7 @@
     "peerDependencies": {
       "react": "^15.5.4",
       "react-redux": "^4.4.5",
-      "redux": "^3.6.0",  
+      "redux": "^3.6.0"
     },
     "dependencies": {
       "immutability-helper": "^2.1.2",
