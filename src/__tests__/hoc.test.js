@@ -1,45 +1,57 @@
-import 'jsdom-global/register';
+/**
+ * @jest-environment jsdom
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import { mount } from 'enzyme';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
+import {mount, configure} from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import toJson from 'enzyme-to-json';
-import { uiState } from '../';
+import {uiState} from '../';
+
+configure({adapter: new Adapter()});
 
 describe('uiState hoc', () => {
-    function testComponent({ display }) {
-        console.log('testComponent'); // eslint-disable-line
+    function _TestComponent({display, setUiState}) {
         return (
             <div>
-                Display: {display.toString()}
+                <span>Display: {display.toString()}</span>{' '}
+                <button
+                    data-testid="flip"
+                    onClick={() => setUiState({display: true})}
+                >
+                    Flip the script
+                </button>
             </div>
         );
     }
 
-    testComponent.propTypes = {
+    _TestComponent.propTypes = {
         display: PropTypes.bool,
+        setUiState: PropTypes.func
     };
 
     const uiStateConfig = {
         name: 'test-component',
         state: () => ({
-            display: false,
-        }),
+            display: false
+        })
     };
+
+    const testComponent = uiState(uiStateConfig)(_TestComponent);
 
     it('should do render without exploding', () => {
         const component = (
             <Provider store={createStore(uiState)}>
-                <wrappedTestComponent />
+                <testComponent />
             </Provider>
         );
 
-        const wrappedTestComponent = uiState(uiStateConfig)(testComponent);
         const renderedComponent = mount(component);
         const tree = toJson(renderedComponent);
 
         expect(tree).toMatchSnapshot();
-        expect(wrappedTestComponent).toMatchSnapshot();
     });
 });

@@ -24,9 +24,9 @@
         "internal"
     ],
     "peerDependencies": {
-        "react": "^16.2.0",
-        "react-redux": "^5.0.6",
-        "redux": "^3.7.2"
+        "react": "^15.0.0 || ^16.0.0",
+        "react-redux": "^4.0.0 || ^5.0.0",
+        "redux": "^3.0.0 || ^4.0.0"
     },
     "dependencies": {
         "immutability-helper": "^2.1.2",
@@ -50,8 +50,9 @@
         "babel-preset-es2015": "^6.24.1",
         "babel-preset-react": "^6.24.1",
         "babel-preset-stage-2": "^6.24.1",
-        "enzyme": "^2.7.1",
-        "enzyme-to-json": "^1.5.0",
+        "enzyme": "^3.5.0",
+        "enzyme-adapter-react-16": "^1.3.1",
+        "enzyme-to-json": "^3.3.4",
         "eslint": "^3.19.0",
         "eslint-config-airbnb-base": "^11.2.0",
         "eslint-plugin-import": "^2.2.0",
@@ -60,10 +61,15 @@
         "jest-cli": "^20.0.3",
         "jsdom": "^11.1.0",
         "jsdom-global": "^3.0.2",
-        "react-dom": "^15.5.4",
-        "react-test-renderer": "^15.5.4"
+        "react": "^16",
+        "react-dom": "^16",
+        "react-redux": "^5",
+        "redux": "^4"
     },
     "jest": {
+        "globals": {
+            "document": true
+        },
         "testEnvironment": "node",
         "testPathIgnorePatterns": [
             "/node_modules/",
